@@ -1,0 +1,9 @@
+var fs = require("fs");
+var obj ;
+fs.readFile("staff.txt",{encoding:"utf-8"},function(err,data){
+	console.log(data);
+	data = data.slice(1);
+//	obj = JSON.parse('{"foo":1}');
+	obj = JSON.parse(data);
+	console.log(obj);
+});

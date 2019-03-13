@@ -1,0 +1,22 @@
+﻿[ 
+  {
+    "name":"建華",
+    "dept" :"IT"
+  },
+  {
+    "name":"Keeper",
+    "dept" : "IT"
+  },
+  {
+    "name":"maio",
+    "dept": "Finance"
+  },
+  {
+   "name":"Kinman",
+   "dept" :"Sales"
+  },
+  {
+   "name":"joeshalla",
+   "dept":"KA"
+  } 
+]
