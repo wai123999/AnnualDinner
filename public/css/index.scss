@@ -3,6 +3,11 @@ $deptSpanWidth:30vw;
 $nameSpanWidth:20vw;
 $btnWidth : 20vw;
 
+:root {
+  --dept-count: 6;
+  --name-count: 2;
+}
+
 * {
   margin: 0;
   box-sizing: border-box;
@@ -70,7 +75,7 @@ $btnWidth : 20vw;
 }
 
 #lottery-winner-dept{
-  width:  calc( #{$deptSpanWidth} * 6);
+  width:  calc( #{$deptSpanWidth} * var(--dept-count));
   display: block;
   overflow:hidden;
   font-size:8.5vmin;
@@ -85,7 +90,7 @@ $btnWidth : 20vw;
 }
 
 #lottery-winner-name{
-  width:  calc( #{$nameSpanWidth} * 6);
+  width:  calc( #{$nameSpanWidth} * var(--name-count));
   display: block;
   overflow:hidden;
   font-size:8.5vmin;
@@ -103,10 +108,10 @@ $btnWidth : 20vw;
 
 
 .glitch {
-  animation: move .7s steps(6) 0s infinite normal backwards;
+  animation: move .7s steps(var(--dept-count)) 0s infinite normal backwards;
 }
 .nameGlitch {
-  animation: nameMove .7s steps(6) 0s infinite normal backwards;
+  animation: nameMove .7s steps(var(--name-count)) 0s infinite normal backwards;
 }
 
 @keyframes nameMove {
@@ -114,7 +119,7 @@ $btnWidth : 20vw;
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(calc( #{$nameSpanWidth} * -6 ));
+    transform: translateX(calc( #{$nameSpanWidth} * -1 * var(--name-count) ));
   }
 }
 
