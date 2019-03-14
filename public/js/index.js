@@ -58,10 +58,16 @@ var nameWidth = $nameWrapper.css("width");
             deptIndex = findDeptArrObjIndex(deptArr[deptWho]);
 
             $winner_name[0].style.setProperty('--name-count', deptObjArr[deptIndex].staffArr.length);
+
+            //calc( #{$nameSpanWidth} * var(--name-count));
+            $winner_name[0].style.setProperty('width', 'calc(' +  deptObjArr[deptIndex].staffArr.length + ' * 20vw');
             //不要用一句過...用attribute去控制
             $winner_name.html(returnStaffSliderStr(deptObjArr[deptIndex]));
 
             $winner_name.addClass("nameGlitch");
+            console.log($(".nameGlitch")[0]);
+            $(".nameGlitch")[0].style.setProperty('--name-count', deptObjArr[deptIndex].staffArr.length);
+
             //str = "";
             //mixName();
         },3000);
