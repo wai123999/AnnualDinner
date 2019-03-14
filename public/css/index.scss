@@ -1,0 +1,131 @@
+/*1ch = 8px*/
+$deptSpanWidth:30vw;
+$nameSpanWidth:20vw;
+$btnWidth : 20vw;
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  margin:0 auto;
+  width: 80vw;
+  height: 100vh;
+  background-size:80vw 100vh;
+  background-image:url(lottery_bg.png)
+}
+
+.lottery {
+  position:relative;
+  top:33vh;
+  left:7vw;
+  //border: 5px solid black;
+  //border:6px solid black;
+  overflow: hidden;
+  width:calc( #{$deptSpanWidth} + #{$nameSpanWidth} + #{$btnWidth} );
+  height:11vh;
+//  border-radius:20px 20px 20px 20px;
+  &-winner {
+     display:inline-block;
+     overflow:hidden;
+     position:absolute;
+     height:11vh;
+     //border-radius:100px 100px 100px 100px;
+     &:nth-child(1)
+     {
+       top:50%;
+       width:$deptSpanWidth;
+       transform:translate(0%,-50%);
+      // border:3px solid blue;
+     }
+     &:nth-child(2)
+     {
+       left:45%;
+       top:50%;
+       width:$nameSpanWidth;
+       transform:translate(-0%,-50%);
+       //border:3px solid red;
+     }
+     &:nth-child(3)
+     {
+       left:80%;
+       top:49%;
+       width:$btnWidth;
+       transform:translate(-0%,-50%);
+      // border:3px solid yellow;
+     }
+  }
+
+}
+
+#start_btn{
+  background-image:url(/css/lottery_btn.png);
+  background-size:cover;
+  width:11vmin;
+  height:11vmin;
+  &:active{
+    transform:translateX(-3px);
+  }
+}
+
+#lottery-winner-dept{
+  width:  calc( #{$deptSpanWidth} * 6);
+  display: block;
+  overflow:hidden;
+  font-size:8.5vmin;
+}
+#lottery-winner-dept span{
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  height:100%;
+  width: $deptSpanWidth;
+  text-align: center;
+}
+
+#lottery-winner-name{
+  width:  calc( #{$nameSpanWidth} * 6);
+  display: block;
+  overflow:hidden;
+  font-size:8.5vmin;
+}
+
+#lottery-winner-name span{
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  height:100%;
+  width: $nameSpanWidth;
+  text-align: center;
+}
+
+
+
+.glitch {
+  animation: move .7s steps(6) 0s infinite normal backwards;
+}
+.nameGlitch {
+  animation: nameMove .7s steps(6) 0s infinite normal backwards;
+}
+
+@keyframes nameMove {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(calc( #{$nameSpanWidth} * -6 ));
+  }
+}
+
+
+@keyframes move {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(calc( #{$deptSpanWidth} * -6 ));
+  }
+}
+
+/*# sourceMappingURL=index.css.map */

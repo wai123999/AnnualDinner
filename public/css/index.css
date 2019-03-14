@@ -5,42 +5,111 @@
 }
 
 .container {
-  width: 100%;
+  margin: 0 auto;
+  width: 80vw;
   height: 100vh;
-  background-image:url(lottery_bg.png);
-  background-size:100% 100%;
+  background-size: 80vw 100vh;
+  background-image: url(lottery_bg.png);
 }
 
 .lottery {
-  border: 1px solid black;
-  width: 15ch;
+  position: relative;
+  top: 33vh;
+  left: 7vw;
   overflow: hidden;
-  
+  width: calc( 30vw + 20vw + 20vw );
+  height: 11vh;
+}
+.lottery-winner {
+  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  height: 11vh;
+}
+.lottery-winner:nth-child(1) {
+  top: 50%;
+  width: 30vw;
+  transform: translate(0%, -50%);
+}
+.lottery-winner:nth-child(2) {
+  left: 45%;
+  top: 50%;
+  width: 20vw;
+  transform: translate(0%, -50%);
+}
+.lottery-winner:nth-child(3) {
+  left: 80%;
+  top: 49%;
+  width: 20vw;
+  transform: translate(0%, -50%);
 }
 
-#lottery-winner {
-  width: 1500000px;
-  display: block;
+#start_btn {
+  background-image: url(/css/lottery_btn.png);
+  background-size: cover;
+  width: 11vmin;
+  height: 11vmin;
 }
-#lottery-winner span {
+#start_btn:active {
+  transform: translateX(-3px);
+}
+
+#lottery-winner-dept {
+  width: calc( 30vw * 6);
+  display: block;
+  overflow: hidden;
+  font-size: 8.5vmin;
+}
+
+#lottery-winner-dept span {
   margin: 0px;
   padding: 0px;
   display: inline-block;
-  width: 15ch;
+  height: 100%;
+  width: 30vw;
+  text-align: center;
+}
+
+#lottery-winner-name {
+  width: calc( 20vw * 6);
+  display: block;
+  overflow: hidden;
+  font-size: 8.5vmin;
+}
+
+#lottery-winner-name span {
+  margin: 0px;
+  padding: 0px;
+  display: inline-block;
+  height: 100%;
+  width: 20vw;
   text-align: center;
 }
 
 .glitch {
-  animation: move .7s steps(6) 0s infinite normal backwards;
+  animation: move 0.7s steps(6) 0s infinite normal backwards;
 }
 
+.nameGlitch {
+  animation: nameMove 0.7s steps(6) 0s infinite normal backwards;
+}
+
+@keyframes nameMove {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(calc( 20vw * -6 ));
+  }
+}
 @keyframes move {
   0% {
     transform: translateX(0px);
   }
   100% {
-    transform: translateX(calc((15 * -8px) * 6));
+    transform: translateX(calc( 30vw * -6 ));
   }
 }
+/*# sourceMappingURL=index.css.map */
 
 /*# sourceMappingURL=index.css.map */
