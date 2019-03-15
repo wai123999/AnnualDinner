@@ -116,7 +116,7 @@ $btnWidth : 20vw;
 
 @keyframes nameMove {
   0% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(calc( #{$nameSpanWidth} * -1 * var(--name-count) ));
@@ -126,7 +126,7 @@ $btnWidth : 20vw;
 
 @keyframes move {
   0% {
-    transform: translateX(0px);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(calc( #{$deptSpanWidth} * -6 ));
