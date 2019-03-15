@@ -1,4 +1,4 @@
-var deptArr = ["IT","KA","Finance","ASO","Sales","OK"];
+var deptArr = []; //used to classification
 //var deptArr = ["KA","KA","KA","KA","KA","KA"]
 var staffArr = ["john","kin","terry","建華","lam_sir","朱經理"];
 var deptObjArr = [];
@@ -9,12 +9,24 @@ var jsonObj;
 var deptIndex;
 var bufferWinnerName ;
 var canStart = true;
+
+function makeDeptNameArr(obj)
+{
+   for ( let j = 0; j < obj.length ; j++)
+   {
+      if ( !deptArr.includes(obj[j].dept) )
+      {
+          deptArr.push(obj[j].dept);
+      }
+   }
+}
 $.ajax({
     url: "/getstaff",
     type: "get", //send it through get method
     success: function(response) {
     //Do Something
       console.log("Receive Json Obj..");
+      makeDeptNameArr(response);  //deptArr used to classification
       classificationByDept(response);
       console.log("classification finish..");
       console.log(deptObjArr);
