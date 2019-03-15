@@ -1,6 +1,6 @@
 var deptArr = ["IT","KA","Finance","ASO","Sales","OK"];
 //var deptArr = ["KA","KA","KA","KA","KA","KA"]
-var staffArr = ["john","kin","terry","建華","lam_sir","朱經理"];
+var staffArr = ["john","kin","terry","建華","lam_sir","朱經理"];  //用來分類..
 var deptObjArr = [];
 var str = "";
 var nameWho;
@@ -33,7 +33,7 @@ var $winner_name = $("#lottery-winner-name");
 var $start_btn = $("#start_btn");
 var deptWidth = $deptWrapper.css("width");
 var nameWidth = $nameWrapper.css("width");
-var root = document.documentElement;
+var root = document.documentElement;  //use to set scss paremter
 
  $lottery_winner_dept.html(returnSliderStr(unknownStr,1));
  $lottery_winner_name.html(returnSliderStr(unknownStr,1));
@@ -53,12 +53,14 @@ var root = document.documentElement;
        //timeout , delete lottery-winner and show
        setTimeout(function()
         {
-
+            /*計算部門停到那...每部門機率一樣
             var currTrans =  $winner_dept.css('transform').split(/[()]/)[1].split(',')[4];
             console.log(currTrans);
             $winner_dept.removeClass("glitch");
             $winner_dept.css("transform","translateX(" + currTrans + "px)");
             deptWho = parseInt(Math.abs(currTrans) / parseInt((deptWidth).substring(0,(deptWidth).indexOf('p'))));
+            */
+            
             console.log("The Dept is :" + deptArr[deptWho]);
             //staffArray.splice(who,1);
             //console.log(staffArray);
@@ -83,7 +85,7 @@ var root = document.documentElement;
             //mixName();
         },3000);
       setTimeout(function(){
-
+        //get translate position .. 會把長度換成pixel return
         var currTrans =  $winner_name.css('transform').split(/[()]/)[1].split(',')[4];
         console.log(currTrans);
         $winner_name.removeClass("nameGlitch");
@@ -198,3 +200,5 @@ function classificationByDept(jsonObj){
       }
     }
 }
+
+function statisticsD
