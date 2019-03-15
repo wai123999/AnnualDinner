@@ -1,15 +1,16 @@
 var deptArr = []; //used to classification
 //var deptArr = ["KA","KA","KA","KA","KA","KA"]
-var staffArr = ["john","kin","terry","建華","lam_sir","朱經理"];
+//var staffArr = ["john","kin","terry","建華","lam_sir","朱經理"];
 var deptObjArr = [];
 var str = "";
 var nameWho;
 var deptWho;
 var jsonObj;
+var deptSpanIndex;  
 var deptIndex;
 var bufferWinnerName ;
 var canStart = true;
-
+var l_totalStaff = 0;
 function makeDeptNameArr(obj)
 {
    for ( let j = 0; j < obj.length ; j++)
@@ -28,8 +29,10 @@ $.ajax({
       console.log("Receive Json Obj..");
       makeDeptNameArr(response);  //deptArr used to classification
       classificationByDept(response);
+      countEachDeptarmentProb();
       console.log("classification finish..");
       console.log(deptObjArr);
+      root.style.setProperty('--dept-count',deptArr.length);
     },
     error: function(xhr) {
       //Do Something to handle error
@@ -54,30 +57,33 @@ var root = document.documentElement;
     if ( canStart )
     {
        canStart = false;
-    shuffle(deptArr);
+       shuffle(deptArr);
+       console.log(deptArr);
      for ( var z = 0 ; z < deptObjArr.length ; z++)
          shuffle(deptObjArr[z].staffArr);
     //mixName();
-        $winner_dept.html(returnSliderStr(deptArr));
+        $winner_dept.html(returnSliderStr(deptArr),0);
       //animate start
+     
         $winner_dept.addClass("glitch");
 
        //timeout , delete lottery-winner and show
        setTimeout(function()
         {
-
+            
             var currTrans =  $winner_dept.css('transform').split(/[()]/)[1].split(',')[4];
             console.log(currTrans);
             $winner_dept.removeClass("glitch");
             $winner_dept.css("transform","translateX(" + currTrans + "px)");
-            deptWho = parseInt(Math.abs(currTrans) / parseInt((deptWidth).substring(0,(deptWidth).indexOf('p'))));
-            console.log("The Dept is :" + deptArr[deptWho]);
+            deptSpanIndex = parseInt(Math.abs(currTrans) / parseInt((deptWidth).substring(0,(deptWidth).indexOf('p'))));
+           // console.log("The Dept is :" + deptArr[deptWho]);
+            deptWho = chooseDepartment();
+            $winner_dept.find("span").eq(deptSpanIndex).html(deptObjArr[deptWho].deptName);
             //staffArray.splice(who,1);
             //console.log(staffArray);
             //$winner_name.html(returnSliderStr(staffArr));
-            deptIndex = findDeptArrObjIndex(deptArr[deptWho]);
-
-
+            deptIndex = findDeptArrObjIndex(deptObjArr[deptWho].deptName);
+            console.log(deptIndex,deptWho);
 
             root.style.setProperty('--name-count',deptObjArr[deptIndex].staffArr.length);
 
@@ -129,6 +135,8 @@ var root = document.documentElement;
           async:false
         });
         deptObjArr[deptIndex].staffArr.splice(staffWho,1);
+        countEachDeptarmentProb(); //when remove a staff, renew prob
+        console.log(deptObjArr);
       },8000);
     }
    });
@@ -189,6 +197,8 @@ function findDeptArrObjIndex(deptName)
 function Dept(deptName){
     this.staffArr = [];
     this.deptName = deptName;
+    this.minRange = 0;
+    this.maxRange = 0;
 }
 
 Dept.prototype.addStaff = function(staffName){
@@ -197,6 +207,21 @@ Dept.prototype.addStaff = function(staffName){
 Dept.prototype.getName = function() { return this.deptName;};
 
 
+function countEachDeptarmentProb(){
+    for ( let i = 0 ; i < deptObjArr.length ; i++)
+    {
+        if ( i == 0) {
+           deptObjArr[i].minRange = 1;
+           deptObjArr[i].maxRange = deptObjArr[i].staffArr.length;
+        }
+        else {
+          deptObjArr[i].minRange = deptObjArr[i-1].maxRange + 1;
+          deptObjArr[i].maxRange = deptObjArr[i].staffArr.length + deptObjArr[i].minRange - 1;
+        }
+    }
+    let t = deptObjArr.length - 1 ;
+    l_totalStaff = deptObjArr[t].maxRange;
+}
 function classificationByDept(jsonObj){
     for ( let j = 0 ; j < deptArr.length ; j++)
     {
@@ -210,3 +235,17 @@ function classificationByDept(jsonObj){
       }
     }
 }
+
+function chooseDepartment()
+{
+   var hit =  Math.floor( Math.random() * l_totalStaff ) + 1;
+    for ( let i = 0; i < deptObjArr.length ; i++)
+    {
+        if ( ( hit >= deptObjArr[i].minRange) && ( hit <= deptObjArr[i].maxRange ))
+        {
+          console.log("hit",hit , deptObjArr[i].minRange,deptObjArr[i].maxRange);
+           return i;
+        }
+    }
+}
+
