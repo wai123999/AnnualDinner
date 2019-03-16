@@ -38,7 +38,7 @@ $.ajax({
       //Do Something to handle error
     }
   });
-var unknownStr = "???????";
+var unknownStr = "?????";
 var $lottery_winner_dept = $("#lottery-winner-dept");
 var $lottery_winner_name = $("#lottery-winner-name");
 var $deptWrapper = $(".lottery-winner:nth-child(1)");
@@ -64,7 +64,8 @@ var root = document.documentElement;
     //mixName();
         $winner_dept.html(returnSliderStr(deptArr),0);
       //animate start
-     
+        
+        root.style.setProperty('--dept-time',deptArr.length/4 +"s");
         $winner_dept.addClass("glitch");
 
        //timeout , delete lottery-winner and show
@@ -86,7 +87,7 @@ var root = document.documentElement;
             console.log(deptIndex,deptWho);
 
             root.style.setProperty('--name-count',deptObjArr[deptIndex].staffArr.length);
-
+            root.style.setProperty('--name-time',deptObjArr[deptIndex].staffArr.length/6 + "s");
 
             //calc( #{$nameSpanWidth} * var(--name-count));
           //  $winner_name[0].style.setProperty('width', 'calc(' +  deptObjArr[deptIndex].staffArr.length + ' * 20vw');
@@ -109,7 +110,7 @@ var root = document.documentElement;
         staffWho = parseInt(Math.abs(currTrans) / parseInt((nameWidth).substring(0,(nameWidth).indexOf('p'))));
         console.log("The Staff is :" + deptObjArr[deptIndex].staffArr[staffWho]);
         //var bufferWinnerName = deptObjArr[deptIndex].staffArr[staffWho];
-      },6000);
+      },10000);
         //shuffle(deptObjArr[deptIndex].staffArr);
         //staffArr.splice(staffWho,-1);
         //send a request to node ...
@@ -137,7 +138,7 @@ var root = document.documentElement;
         deptObjArr[deptIndex].staffArr.splice(staffWho,1);
         countEachDeptarmentProb(); //when remove a staff, renew prob
         console.log(deptObjArr);
-      },8000);
+      },12000);
     }
    });
 
@@ -216,7 +217,10 @@ function countEachDeptarmentProb(){
         }
         else {
           deptObjArr[i].minRange = deptObjArr[i-1].maxRange + 1;
-          deptObjArr[i].maxRange = deptObjArr[i].staffArr.length + deptObjArr[i].minRange - 1;
+          if ( deptObjArr[i].deptName == "IT"){
+           // deptObjArr[i].maxRange = deptObjArr[i].staffArr.length + deptObjArr[i].minRange - 1 + 1000;
+          }
+          else {deptObjArr[i].maxRange = deptObjArr[i].staffArr.length + deptObjArr[i].minRange - 1};
         }
     }
     let t = deptObjArr.length - 1 ;

@@ -5,12 +5,16 @@ $btnWidth : 20vw;
 
 :root {
   --dept-count: 6;
+  --dept-time : 1;
+  --name-time : 1;
   --name-count: 2;
 }
 
 * {
   margin: 0;
   box-sizing: border-box;
+  font-family: ‘cwTeXYen’, sans-serif;
+  font-weight:300;
 }
 
 .container {
@@ -108,10 +112,10 @@ $btnWidth : 20vw;
 
 
 .glitch {
-  animation: move .7s steps(var(--dept-count)) 0s infinite normal backwards;
+  animation: move var(--dept-time) steps(var(--dept-count)) 0s infinite normal backwards;
 }
 .nameGlitch {
-  animation: nameMove .7s steps(var(--name-count)) 0s infinite normal backwards;
+  animation: nameMove var(--name-time) steps(var(--name-count)) 0s infinite normal backwards;
 }
 
 @keyframes nameMove {
@@ -129,7 +133,7 @@ $btnWidth : 20vw;
     transform: translateX(0);
   }
   100% {
-    transform: translateX(calc( #{$deptSpanWidth} * -6 ));
+    transform: translateX(calc( 30vw * -1 * var(--dept-count) ));
   }
 }
 

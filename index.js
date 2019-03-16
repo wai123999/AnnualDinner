@@ -6,7 +6,7 @@ var obj;
 
 
 
-fs.readFile("staff.txt",{encoding:"utf-8"},function(err,data){
+fs.readFile("抽獎名單.txt",{encoding:"utf-8"},function(err,data){
 	//console.log(data);
 	//read utf8 something error,need cut the position 0
 	//data = data.slice(1);
@@ -49,7 +49,7 @@ app.get('/win',function(req,res){
 	}
 	//console.log(obj);
 	var jsonStr = JSON.stringify(obj);
-	fs.writeFile('staff.txt', jsonStr , {encoding:"utf-8",flag:"w"},function(err){
+	fs.writeFile('抽獎名單.txt', jsonStr , {encoding:"utf-8",flag:"w"},function(err){
 		if ( err ){
 			return console.log(err);
 		}
